@@ -1,5 +1,6 @@
 package in.kumar.services;
 
+import in.kumar.entity.Demo;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,16 @@ public class ChatServiceImpl implements ChatService{
 
 
     @Override
-    public String Chat(String query) {
-   String  response =  chatClient.prompt()
+    public Demo Chat(String query) {
+
+
+   Demo  demo =  chatClient.prompt()
                 .user(query) // userPrompt
                 .call()
-                .content();
+                .entity(Demo.class);
 
 
 
-        return response;
+        return demo;
     }
 }

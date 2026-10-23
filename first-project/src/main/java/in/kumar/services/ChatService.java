@@ -1,6 +1,8 @@
 package in.kumar.services;
 
+import in.kumar.entity.Demo;
+
 public interface ChatService {
 
-    String Chat(String query);
+    Demo Chat(String query);
 }

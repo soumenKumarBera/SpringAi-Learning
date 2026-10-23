@@ -1,5 +1,6 @@
 package in.kumar.controller;
 
+import in.kumar.entity.Demo;
 import in.kumar.services.ChatService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,11 @@ public class ChatController {
 
 
     @GetMapping("/chat")
-    public ResponseEntity<String> chat(@RequestParam(value = "q", required = true) String query){
+    public ResponseEntity<Demo> chat(@RequestParam(value = "q", required = true) String query){
 
-        String responseAi = chatService.Chat(query);
+        Demo responseAi = chatService.Chat(query);
 
-        return ResponseEntity.ok("AI-> "+responseAi);
+        return ResponseEntity.ok(responseAi);
     }
 
 }
