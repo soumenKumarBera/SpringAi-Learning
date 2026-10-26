@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Stack;
+
 @RestController
 @RequestMapping
 public class ChatController {
@@ -18,12 +20,27 @@ public class ChatController {
         private ChatService chatService;
 
 
+   //type object return
     @GetMapping("/chat")
     public ResponseEntity<Demo> chat(@RequestParam(value = "q", required = true) String query){
 
-        Demo responseAi = chatService.Chat(query);
+       Demo responseAi = chatService.Chat(query);
 
         return ResponseEntity.ok(responseAi);
-    }
+    };
+
+
+  //type String return
+    @GetMapping("/chatAi")
+    public ResponseEntity<String> chatAi(@RequestParam(value = "q", required = true) String query){
+
+        String responseAi = chatService.ChatAi(query);
+
+
+        return ResponseEntity.ok(responseAi);
+    };
+
+
+
 
 }
