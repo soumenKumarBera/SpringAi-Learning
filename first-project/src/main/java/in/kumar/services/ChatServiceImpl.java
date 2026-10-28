@@ -2,8 +2,12 @@ package in.kumar.services;
 
 import in.kumar.entity.Demo;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class ChatServiceImpl implements ChatService{
@@ -35,5 +39,23 @@ public class ChatServiceImpl implements ChatService{
         return response;
     }
 
+    public String chatTemplate(){
+
+//        PromptTemplate strTemplate = PromptTemplate.builder().template("what is {techName}? tell me example {example}").build();
+//        String renderMessage = strTemplate.render(Map.of(
+//                "techName", "Spring",
+//                "example", "SpringBoot"
+//        ));
+//
+//       Prompt prompt = new Prompt(renderMessage);
+
+      var content = chatClient.prompt()
+              .system(system -> system.text("Your are helpinng codinng asistennt"))
+              .user(u -> u.text("what is {techName}? tell me example {example}").param("example", "spring controller example").param("techName", "spring"))
+               .call()
+               .content();
+
+      return content;
+    }
 
 }
