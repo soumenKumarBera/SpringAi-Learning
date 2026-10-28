@@ -5,6 +5,8 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -14,6 +16,9 @@ public class ChatServiceImpl implements ChatService{
 
     @Autowired
     private ChatClient chatClient;
+
+    @Value("${classpath:/propatice/user-message.st}")
+    private Resource  userMes;
 
 
 
@@ -51,7 +56,7 @@ public class ChatServiceImpl implements ChatService{
 
       var content = chatClient.prompt()
               .system(system -> system.text("Your are helpinng codinng asistennt"))
-              .user(u -> u.text("what is {techName}? tell me example {example}").param("example", "spring controller example").param("techName", "spring"))
+              .user(u -> u.text(userMes).param("concept", "spring"))
                .call()
                .content();
 
