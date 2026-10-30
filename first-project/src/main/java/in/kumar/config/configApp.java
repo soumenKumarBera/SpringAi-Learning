@@ -1,5 +1,6 @@
 package in.kumar.config;
 
+import in.kumar.advisore.TokenPrintAdvisors;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SafeGuardAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -16,7 +17,7 @@ public class configApp {
     public ChatClient chatClient(ChatClient.Builder builder){
 
         return builder
-                .defaultAdvisors(new SimpleLoggerAdvisor(), new SafeGuardAdvisor(List.of("game")))
+                .defaultAdvisors( new TokenPrintAdvisors(), new SafeGuardAdvisor(List.of("game")))
                 .defaultOptions(OpenAiChatOptions.builder()
                         .model("openai/gpt-oss-20b")
                         .temperature(0.3)
