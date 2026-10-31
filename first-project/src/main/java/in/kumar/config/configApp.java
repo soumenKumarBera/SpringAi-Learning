@@ -21,7 +21,7 @@ public class configApp {
                 .defaultOptions(OpenAiChatOptions.builder()
                         .model("openai/gpt-oss-20b")
                         .temperature(0.3)
-                        .maxTokens(200)
+//                        .maxTokens(200)
                         )
                 .build();
 

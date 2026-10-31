@@ -1,6 +1,7 @@
 package in.kumar.services;
 
 import in.kumar.entity.Demo;
+import org.jspecify.annotations.Nullable;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.Map;
 
@@ -42,6 +44,18 @@ public class ChatServiceImpl implements ChatService{
                 .call()
                 .content();
         return response;
+    }
+
+    //.Streaming Responses
+    @Override
+    public Flux<String> streamChat(String query) {
+
+        return chatClient
+                .prompt()
+                .user(query)
+                .stream()
+                .content();
+
     }
 
     public String chatTemplate(){
